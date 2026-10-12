@@ -1,0 +1,53 @@
+{
+  "realm": "laboratorio1",
+  "enabled": true,
+  "sslRequired": "none",
+  "accessTokenLifespan": 900,
+  "roles": {
+    "realm": [
+      {
+        "name": "SUPER-ADMIN-ROLE",
+        "description": "Administrador: registra, actualiza y borra productos y categorias"
+      },
+      {
+        "name": "USER",
+        "description": "Usuario: solo consulta productos y categorias"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "laboratorio1-api",
+      "name": "API Laboratorio 1 (Spring Boot)",
+      "enabled": true,
+      "publicClient": true,
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "redirectUris": ["http://localhost:*", "https://oauth.pstmn.io/v1/callback"],
+      "webOrigins": ["+"],
+      "fullScopeAllowed": true
+    }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "enabled": true,
+      "email": "admin@laboratorio1.local",
+      "emailVerified": true,
+      "firstName": "Super",
+      "lastName": "Admin",
+      "credentials": [{ "type": "password", "value": "admin123", "temporary": false }],
+      "realmRoles": ["SUPER-ADMIN-ROLE"]
+    },
+    {
+      "username": "user",
+      "enabled": true,
+      "email": "user@laboratorio1.local",
+      "emailVerified": true,
+      "firstName": "Normal",
+      "lastName": "User",
+      "credentials": [{ "type": "password", "value": "user123", "temporary": false }],
+      "realmRoles": ["USER"]
+    }
+  ]
+}

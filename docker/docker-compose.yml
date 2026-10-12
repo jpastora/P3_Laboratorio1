@@ -1,0 +1,29 @@
+services:
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: postgres-lab1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4
+    container_name: keycloak-lab1
+    entrypoint: ["/bin/bash", "/opt/keycloak/start.sh"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    ports:
+      - "8180:8080"
+    volumes:
+      - ./keycloak/realm-laboratorio1.json:/opt/keycloak/data/import/realm-laboratorio1.json:ro
+      - ./keycloak/start.sh:/opt/keycloak/start.sh:ro
+
+volumes:
+  postgres_data:
